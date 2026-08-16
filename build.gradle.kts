@@ -1,5 +1,16 @@
+buildscript {
+    repositories {
+        maven("https://maven.fabricmc.net/")
+        mavenCentral()
+    }
+    dependencies {
+        classpath("fabric-loom:fabric-loom.gradle.plugin:1.3.0")
+    }
+}
+apply(plugin = "fabric-loom")
+
 plugins {
-    id("fabric-loom") version "1.3.0"
+    // keep plugin DSL for consumers that support pluginManagement
 }
 
 repositories {
