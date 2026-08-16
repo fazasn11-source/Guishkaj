@@ -33,17 +33,35 @@ jobs:
         with:
           gradle-version: '8.6'
 
+      - name: Find project directory
+        id: findproj
+        run: |
+          # Найти первую папку с build.gradle.kts или build.gradle
+          proj=$(find . -maxdepth 3 -type f \( -name 'build.gradle.kts' -o -name 'build.gradle' \) | head -n1)
+          if [ -z "$proj" ]; then
+            echo "NO_PROJECT=1" >> $GITHUB_ENV
+            echo "No build.gradle(.kts) found"
+            exit 1
+          fi
+          projdir=$(dirname "$proj")
+          echo "PROJECT_DIR=$projdir" >> $GITHUB_ENV
+          echo "Found project dir: $projdir"
+      - name: Show project dir (debug)
+        run: |
+          echo "PROJECT_DIR=${PROJECT_DIR}"
+          ls -la "${PROJECT_DIR}"
+
       - name: Build (use wrapper if present, otherwise gradle)
         run: |
-          if [ -f "./gradlew" ]; then
-            chmod +x ./gradlew
-            ./gradlew build --no-daemon
+          if [ -f "${PROJECT_DIR}/gradlew" ]; then
+            chmod +x "${PROJECT_DIR}/gradlew"
+            "${PROJECT_DIR}/gradlew" build --no-daemon
           else
-            gradle build --no-daemon
+            gradle -p "${PROJECT_DIR}" build --no-daemon
           fi
 
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
         with:
           name: guishkaj-jar
-          path: build/libs/*.jar
+          path: '**/build/libs/*.jar'
