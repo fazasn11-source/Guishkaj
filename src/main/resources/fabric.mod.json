@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "id": "guishkaj",
+  "version": "0.1.0",
+  "name": "Guishkaj",
+  "entrypoints": {
+    "client": [
+      "com.guishkaj.GuishkajMod"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.0",
+    "fabric": "*",
+    "minecraft": "1.21.4"
+  }
+}
