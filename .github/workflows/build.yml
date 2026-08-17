@@ -55,9 +55,9 @@ jobs:
         run: |
           if [ -f "${PROJECT_DIR}/gradlew" ]; then
             chmod +x "${PROJECT_DIR}/gradlew"
-            "${PROJECT_DIR}/gradlew" build --no-daemon
+            "${PROJECT_DIR}/gradlew" build --no-daemon --info --stacktrace
           else
-            gradle -p "${PROJECT_DIR}" build --no-daemon
+            gradle -p "${PROJECT_DIR}" build --no-daemon --info --stacktrace
           fi
 
       - name: Upload JAR artifact
