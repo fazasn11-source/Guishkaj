@@ -36,7 +36,7 @@ jobs:
       - name: Find project directory
         id: findproj
         run: |
-          # Найти первую папку с build.gradle.kts или build.gradle
+          # Find the first build.gradle(.kts)
           proj=$(find . -maxdepth 3 -type f \( -name 'build.gradle.kts' -o -name 'build.gradle' \) | head -n1)
           if [ -z "$proj" ]; then
             echo "NO_PROJECT=1" >> $GITHUB_ENV
@@ -46,6 +46,7 @@ jobs:
           projdir=$(dirname "$proj")
           echo "PROJECT_DIR=$projdir" >> $GITHUB_ENV
           echo "Found project dir: $projdir"
+
       - name: Show project dir (debug)
         run: |
           echo "PROJECT_DIR=${PROJECT_DIR}"
