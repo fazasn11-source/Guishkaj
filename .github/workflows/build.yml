@@ -37,7 +37,7 @@ jobs:
         id: findproj
         run: |
           # Find the first build.gradle(.kts)
-          proj=$(find . -maxdepth 3 -type f \( -name 'build.gradle.kts' -o -name 'build.gradle' \) | head -n1)
+          proj=$(find . -maxdepth 6 -type f \( -name 'build.gradle.kts' -o -name 'build.gradle' \) | head -n1)
           if [ -z "$proj" ]; then
             echo "NO_PROJECT=1" >> $GITHUB_ENV
             echo "No build.gradle(.kts) found"
@@ -66,3 +66,11 @@ jobs:
         with:
           name: guishkaj-jar
           path: '**/build/libs/*.jar'
+
+      - name: Create GitHub Release and upload JAR
+        if: success()
+        uses: ncipollo/release-action@v1
+        with:
+          tag: v${{ github.run_number }}
+          name: Release ${{ github.run_number }}
+          files: '**/build/libs/*.jar'
