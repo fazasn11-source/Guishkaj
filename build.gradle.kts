@@ -1,23 +1,10 @@
-buildscript {
-    repositories {
-        maven("https://maven.fabricmc.net/")
-        mavenCentral()
-    }
-    dependencies {
-        classpath("net.fabricmc:fabric-loom:1.3.0")
-    }
-}
-apply(plugin = "fabric-loom")
-
 plugins {
-    // keep plugins block for pluginManagement-aware builds
+    id("fabric-loom") version "1.3.0"
 }
 
 repositories {
     mavenCentral()
-    maven {
-        url = uri("https://maven.fabricmc.net/")
-    }
+    maven("https://maven.fabricmc.net/")
 }
 
 group = "com.guishkaj"
@@ -30,7 +17,6 @@ base {
 dependencies {
     minecraft("com.mojang:minecraft:1.21.4")
     mappings("net.fabricmc:yarn:1.21.4+build.1:v2")
-
     modImplementation("net.fabricmc:fabric-api:0.89.0+1.21.4")
 }
 
