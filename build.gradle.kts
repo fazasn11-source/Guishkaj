@@ -1,5 +1,5 @@
 plugins {
-    id("fabric-loom") version "1.3.0"
+    id("net.fabricmc.loom") version "1.5.8"
 }
 
 repositories {
