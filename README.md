@@ -1,1 +1,1 @@
-Triggered rebuild to test plugin resolution
+Triggered rebuild after switching to plugins DSL
